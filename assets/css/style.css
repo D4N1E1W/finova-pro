@@ -1,0 +1,114 @@
+/* FONT FAMILY*/
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap");
+@font-face {
+  font-family: "eudoxus-sans";
+  src: url("../font/eudoxus-sans/eudoxus-sans-extra-bold.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "eudoxus-sans";
+  src: url("../font/eudoxus-sans/eudoxus-sans-bold.ttf");
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "eudoxus-sans";
+  src: url("../font/eudoxus-sans/eudoxus-sans-medium.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "eudoxus-sans";
+  src: url("../font/eudoxus-sans/eudoxus-sans-regular.ttf");
+  font-display: swap;
+}
+
+* {
+  font-family: "eudoxus-sans", sans-serif;
+}
+/* SCROLLBAR  */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aa832f;
+  border-radius: 12px;
+}
+
+body,
+html {
+  background-color: #0a0a0b;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth !important;
+}
+
+/* SLIDER  */
+.swiper-pagination-bullet {
+  background-color: white !important;
+  width: 8px !important;
+  height: 8px !important;
+  opacity: 100 !important;
+}
+
+.swiper-pagination-bullet-active {
+  width: 12px !important;
+  height: 12px !important;
+  opacity: 100 !important;
+  background-color: #aa832f !important;
+}
+
+.scrollcard-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.border-box::before {
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  padding: 1.3px;
+  border-radius: 16px;
+  background: radial-gradient(
+    94.31% 66.31% at -53.25% 10.23%,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none !important;
+}
+
+.bg-gradient-custom {
+  background: linear-gradient(180deg, #aa832f 0%, #795302 100%);
+}
+
+.bg-gradient-custom:hover {
+  background: linear-gradient(180deg, #795302 0%, #aa832f 100%);
+}
+
+.accordion-body {
+  transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform-origin: top;
+  opacity: 0;
+}
+
+.accordion-body.open {
+  opacity: 100%;
+}
+
+@media (max-width: 1920px) and (min-width: 1025px) {
+  .hero_height {
+    min-height: calc(100vh - 136px);
+  }
+}
