@@ -57,42 +57,52 @@
             <p class="ml-4 text-white font-bold text-sm">200</p>
         </div>
     </div>
-    <!-- NAVBAR START -->
-    <nav class="relative">
-        <img class="absolute end-0 top-0 pointer-events-none" src="./assets/image/webp/hero-right-top-ellipse.webp"
-            alt="right">
-        <img class="absolute start-0 top-0 pointer-events-none" src="./assets/image/webp/hero-left-top-ellipse.webp"
-            alt="left">
-        <div class="flex justify-between items-center max-w-[1072px] mx-auto px-4 lg:px-7 xl:px-5 py-[19px]">
-            <img class="w-[110px] md:w-[132px] cursor-pointer" src="./assets/image/svg/logo.svg" alt="logo">
-            <button aria-label="toggle show" onclick="HANDLE_NAV_OPEN()" id="show-nav" class="relative"> <img
-                    src="./assets/image/svg/toggle.svg" alt="toggle"></button>
-        </div>
-    </nav>
-    <div id="navbar"
-        class="fixed z-[100] top-0 duration-300 -right-[430px] h-full w-full bg-black flex justify-center max-w-[425px]">
-        <button aria-label="toggle hide" onclick="HANDLE_NAV_OPEN()" id="HANDLE_HIDE_NAV"
-            class="absolute right-6 top-6"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 20L4 4M20 4L4 20" stroke="white" stroke-width="2" stroke-linecap="round" />
-            </svg>
+   <!-- NAVBAR START -->
+<nav class="relative">
+    <img class="absolute end-0 top-0 pointer-events-none" src="./assets/image/webp/hero-right-top-ellipse.webp" alt="right">
+    <img class="absolute start-0 top-0 pointer-events-none" src="./assets/image/webp/hero-left-top-ellipse.webp" alt="left">
+    <div class="flex justify-between items-center max-w-[1072px] mx-auto px-4 lg:px-7 xl:px-5 py-[19px]">
+        <img class="w-[110px] md:w-[132px] cursor-pointer" src="./assets/image/svg/logo.svg" alt="logo">
+        <button aria-label="toggle show" onclick="HANDLE_NAV_OPEN()" id="show-nav" class="relative">
+            <img src="./assets/image/svg/toggle.svg" alt="toggle">
         </button>
-        <ul class="flex flex-col gap-8 items-center justify-center">
-            <li><a rel="noopener noreferrer" aria-label="home" onclick="HANDLE_HIDE_NAV()" href="#membership"
-                    class="md:text-xl text-base font-noraml leading-126 text-moon-mist after:absolute relative z-10 after:-z-10 after:bg-luxor-gold after:w-0 after:h-[1.5px] after:left-[50%] after:bottom-[-3px] hover:after:w-full hover:after:left-0 after:duration-300">Join</a>
-            </li>
-            <li><a rel="noopener noreferrer" aria-label="about" onclick="HANDLE_HIDE_NAV()" href="#faqs"
-                    class="md:text-xl text-base font-noraml leading-126 text-moon-mist after:absolute relative z-10 after:-z-10 after:bg-luxor-gold after:w-0 after:h-[1.5px] after:left-[50%] after:bottom-[-3px] hover:after:w-full hover:after:left-0 after:duration-300">Faqs</a>
-            </li>
-            <li><a rel="noopener noreferrer" aria-label="faqs" onclick="HANDLE_HIDE_NAV()"
-                    href="https://www.finova.finance/discord" target="_blank"
-                    class="md:text-xl text-base font-noraml leading-126 text-moon-mist after:absolute relative z-10 after:-z-10 after:bg-luxor-gold after:w-0 after:h-[1.5px] after:left-[50%] after:bottom-[-3px] hover:after:w-full hover:after:left-0 after:duration-300">Discord</a>
-            </li>
+    </div>
+</nav>
+<div id="navbar" class="fixed z-[100] top-0 duration-300 -right-[430px] h-full w-full bg-black flex justify-center max-w-[425px]">
+    <button aria-label="toggle hide" onclick="HANDLE_NAV_OPEN()" id="HANDLE_HIDE_NAV" class="absolute right-6 top-6">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 20L4 4M20 4L4 20" stroke="white" stroke-width="2" stroke-linecap="round" />
+        </svg>
+    </button>
+    <ul class="flex flex-col gap-8 items-center justify-center">
+        <li>
+            <a rel="noopener noreferrer" aria-label="home" onclick="HANDLE_HIDE_NAV()" href="#membership"
+                class="md:text-xl text-base font-noraml leading-126 text-moon-mist after:absolute relative z-10 after:-z-10 after:bg-luxor-gold after:w-0 after:h-[1.5px] after:left-[50%] after:bottom-[-3px] hover:after:w-full hover:after:left-0 after:duration-300">
+                Join
+            </a>
+        </li>
+        <li>
+            <a rel="noopener noreferrer" aria-label="about" onclick="HANDLE_HIDE_NAV()" href="#faqs"
+                class="md:text-xl text-base font-noraml leading-126 text-moon-mist after:absolute relative z-10 after:-z-10 after:bg-luxor-gold after:w-0 after:h-[1.5px] after:left-[50%] after:bottom-[-3px] hover:after:w-full hover:after:left-0 after:duration-300">
+                Faqs
+            </a>
+        </li>
+        <li>
+            <a rel="noopener noreferrer" aria-label="discord" onclick="HANDLE_HIDE_NAV()" href="https://www.finova.finance/discord" target="_blank"
+                class="md:text-xl text-base font-noraml leading-126 text-moon-mist after:absolute relative z-10 after:-z-10 after:bg-luxor-gold after:w-0 after:h-[1.5px] after:left-[50%] after:bottom-[-3px] hover:after:w-full hover:after:left-0 after:duration-300">
+                Discord
+            </a>
+        </li>
+        <li>
+            <a rel="noopener noreferrer" aria-label="login" onclick="HANDLE_HIDE_NAV()" href="https://sso.teachable.com/secure/814492/identity/login/password" target="_blank"
+                class="md:text-xl text-base font-noraml leading-126 text-moon-mist after:absolute relative z-10 after:-z-10 after:bg-luxor-gold after:w-0 after:h-[1.5px] after:left-[50%] after:bottom-[-3px] hover:after:w-full hover:after:left-0 after:duration-300">
+                Login
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="overlay" onclick="HANDLE_HIDE_NAV()" class="fixed z-[99] hidden inset-0 h-full w-full bg-primary-black"></div>
 
-        </ul>
-    </div>
-    <div id="overlay" onclick="HANDLE_HIDE_NAV()" class="fixed z-[99] hidden inset-0 h-full w-full bg-primary-black">
-    </div>
     <!-- HERO START-->
     <header class="hero_height flex justify-between items-center pt-[40px] xl:pt-0 2xl:pt-[64px]">
         <div class="container max-w-[1072px] mx-auto px-5 lg:px-7 xl:px-5 pb-6 md:pb-0">
