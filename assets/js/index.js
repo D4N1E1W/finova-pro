@@ -58,6 +58,7 @@ function HANDLE_START_COUNT() {
   };
 
   let targetDate = getNextThursday();
+  let weekPattern;
 
   const updateCountdown = () => {
     let now = new Date();
@@ -80,9 +81,13 @@ function HANDLE_START_COUNT() {
       const startOfWeek = new Date(targetDate);
       startOfWeek.setDate(startOfWeek.getDate() - 7);
       const daysSinceStart = Math.floor((now - startOfWeek) / (1000 * 60 * 60 * 24));
-      const weekNumber = Math.floor((startOfWeek - new Date(startOfWeek.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
-      const seed = weekNumber + startOfWeek.getFullYear();
-      const weekPattern = generateWeeklyPattern(seed);
+      
+      if (!weekPattern) {
+        const weekNumber = Math.floor((startOfWeek - new Date(startOfWeek.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
+        const seed = weekNumber + startOfWeek.getFullYear();
+        weekPattern = generateWeeklyPattern(seed);
+      }
+      
       const slotCount = weekPattern[daysSinceStart];
       const daysLeft = days + 1;
 
@@ -101,6 +106,7 @@ function HANDLE_START_COUNT() {
       }
     } else {
       targetDate = getNextThursday(); // Reset to next Thursday
+      weekPattern = null; // Reset weekPattern to generate new pattern for the new week
     }
   };
 
