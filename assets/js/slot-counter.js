@@ -14,9 +14,9 @@ function getNextThursday() {
 
 function updateCountdown() {
     const now = new Date();
-    const endTime = getNextThursday();
-    const timeLeft = endTime - now;
-
+    const endOfWeek = getNextThursday();
+    
+    const timeLeft = endOfWeek - now;
     const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
