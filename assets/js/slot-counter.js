@@ -39,27 +39,9 @@ function updateCountdown() {
     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    document.querySelectorAll('.Days').forEach(el => {
-        el.style.opacity = 0;
-        setTimeout(() => {
-            el.textContent = days.toString().padStart(2, '0');
-            el.style.opacity = 1;
-        }, 100);
-    });
-    document.querySelectorAll('.Hours').forEach(el => {
-        el.style.opacity = 0;
-        setTimeout(() => {
-            el.textContent = hours.toString().padStart(2, '0');
-            el.style.opacity = 1;
-        }, 100);
-    });
-    document.querySelectorAll('.Minutes').forEach(el => {
-        el.style.opacity = 0;
-        setTimeout(() => {
-            el.textContent = minutes.toString().padStart(2, '0');
-            el.style.opacity = 1;
-        }, 100);
-    });
+    document.querySelectorAll('.Days').forEach(el => el.textContent = days.toString().padStart(2, '0'));
+    document.querySelectorAll('.Hours').forEach(el => el.textContent = hours.toString().padStart(2, '0'));
+    document.querySelectorAll('.Minutes').forEach(el => el.textContent = minutes.toString().padStart(2, '0'));
     document.querySelectorAll('.Seconds').forEach(el => {
         el.style.opacity = 0;
         setTimeout(() => {
