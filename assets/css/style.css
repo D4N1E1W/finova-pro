@@ -112,3 +112,8 @@ html {
     min-height: calc(100vh - 136px);
   }
 }
+
+/* New rule for countdown timer, outside of any media query */
+.Days, .Hours, .Minutes, .Seconds {
+  transition: opacity 0.2s ease-in-out;
+}
