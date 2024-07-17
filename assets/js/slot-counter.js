@@ -39,19 +39,35 @@ function updateCountdown() {
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
     if (days !== lastDays) {
-        document.querySelectorAll('.Days').forEach(el => el.textContent = days.toString().padStart(2, '0'));
+        document.querySelectorAll('.Days').forEach(el => {
+            if (el.textContent !== days.toString().padStart(2, '0')) {
+                el.textContent = days.toString().padStart(2, '0');
+            }
+        });
         lastDays = days;
     }
     if (hours !== lastHours) {
-        document.querySelectorAll('.Hours').forEach(el => el.textContent = hours.toString().padStart(2, '0'));
+        document.querySelectorAll('.Hours').forEach(el => {
+            if (el.textContent !== hours.toString().padStart(2, '0')) {
+                el.textContent = hours.toString().padStart(2, '0');
+            }
+        });
         lastHours = hours;
     }
     if (minutes !== lastMinutes) {
-        document.querySelectorAll('.Minutes').forEach(el => el.textContent = minutes.toString().padStart(2, '0'));
+        document.querySelectorAll('.Minutes').forEach(el => {
+            if (el.textContent !== minutes.toString().padStart(2, '0')) {
+                el.textContent = minutes.toString().padStart(2, '0');
+            }
+        });
         lastMinutes = minutes;
     }
     if (seconds !== lastSeconds) {
-        document.querySelectorAll('.Seconds').forEach(el => el.textContent = seconds.toString().padStart(2, '0'));
+        document.querySelectorAll('.Seconds').forEach(el => {
+            if (el.textContent !== seconds.toString().padStart(2, '0')) {
+                el.textContent = seconds.toString().padStart(2, '0');
+            }
+        });
         lastSeconds = seconds;
     }
 }
@@ -72,11 +88,16 @@ function updateSlotCount() {
     const daysLeft = Math.ceil((nextThursday - now) / (1000 * 60 * 60 * 24));
 
     document.querySelectorAll('.slot-count').forEach(el => {
-        el.textContent = slotCount;
+        if (el.textContent != slotCount) {
+            el.textContent = slotCount;
+        }
     });
 
     document.querySelectorAll('.time-frame').forEach(el => {
-        el.textContent = daysLeft === 1 ? 'today' : `in the next ${daysLeft} days`;
+        const newText = daysLeft === 1 ? 'today' : `in the next ${daysLeft} days`;
+        if (el.textContent != newText) {
+            el.textContent = newText;
+        }
     });
 
     const progressBar = document.querySelector('.progress-bar');
