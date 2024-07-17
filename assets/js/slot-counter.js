@@ -26,6 +26,8 @@ function generateWeeklyPattern(seed) {
     return pattern;
 }
 
+let lastDays, lastHours, lastMinutes, lastSeconds;
+
 function updateCountdown() {
     const now = new Date();
     const endTime = getNextThursday();
@@ -36,10 +38,22 @@ function updateCountdown() {
     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    document.querySelectorAll('.Days').forEach(el => el.textContent = days.toString().padStart(2, '0'));
-    document.querySelectorAll('.Hours').forEach(el => el.textContent = hours.toString().padStart(2, '0'));
-    document.querySelectorAll('.Minutes').forEach(el => el.textContent = minutes.toString().padStart(2, '0'));
-    document.querySelectorAll('.Seconds').forEach(el => el.textContent = seconds.toString().padStart(2, '0'));
+    if (days !== lastDays) {
+        document.querySelectorAll('.Days').forEach(el => el.textContent = days.toString().padStart(2, '0'));
+        lastDays = days;
+    }
+    if (hours !== lastHours) {
+        document.querySelectorAll('.Hours').forEach(el => el.textContent = hours.toString().padStart(2, '0'));
+        lastHours = hours;
+    }
+    if (minutes !== lastMinutes) {
+        document.querySelectorAll('.Minutes').forEach(el => el.textContent = minutes.toString().padStart(2, '0'));
+        lastMinutes = minutes;
+    }
+    if (seconds !== lastSeconds) {
+        document.querySelectorAll('.Seconds').forEach(el => el.textContent = seconds.toString().padStart(2, '0'));
+        lastSeconds = seconds;
+    }
 }
 
 function updateSlotCount() {
