@@ -1,14 +1,11 @@
 function getNextThursday() {
     const now = new Date();
-    const targetDay = 4; // 0 is Sunday, 4 is Thursday
-    const daysUntilThursday = (targetDay + 7 - now.getDay()) % 7;
-    const nextThursday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + daysUntilThursday);
+    const nextThursday = new Date(now);
+    nextThursday.setDate(now.getDate() + ((4 + 7 - now.getDay()) % 7));
     nextThursday.setHours(12, 0, 0, 0); // Set to noon ET
-    
     if (now > nextThursday) {
         nextThursday.setDate(nextThursday.getDate() + 7);
     }
-    
     return nextThursday;
 }
 
@@ -42,13 +39,7 @@ function updateCountdown() {
     document.querySelectorAll('.Days').forEach(el => el.textContent = days.toString().padStart(2, '0'));
     document.querySelectorAll('.Hours').forEach(el => el.textContent = hours.toString().padStart(2, '0'));
     document.querySelectorAll('.Minutes').forEach(el => el.textContent = minutes.toString().padStart(2, '0'));
-    document.querySelectorAll('.Seconds').forEach(el => {
-        el.style.opacity = 0;
-        setTimeout(() => {
-            el.textContent = seconds.toString().padStart(2, '0');
-            el.style.opacity = 1;
-        }, 100);
-    });
+    document.querySelectorAll('.Seconds').forEach(el => el.textContent = seconds.toString().padStart(2, '0'));
 }
 
 function updateSlotCount() {
