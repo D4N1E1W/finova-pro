@@ -40,10 +40,27 @@ function HANDLE_START_COUNT() {
     return nextThursday;
   };
 
+  const generateWeeklyPattern = (seed) => {
+    const pattern = [];
+    let remainingSlots = 5 + (seed % 5); // Start with 5-9 slots
+    const daysInWeek = 7;
+    
+    for (let i = 0; i < daysInWeek; i++) {
+      pattern.push(remainingSlots);
+      if (remainingSlots > 3 && i < daysInWeek - 1) {
+        const maxDecrease = Math.min(remainingSlots - 3, Math.ceil((remainingSlots - 3) / (daysInWeek - i - 1)));
+        if (Math.random() < 0.7) { // 70% chance to decrease
+          remainingSlots -= Math.floor(Math.random() * maxDecrease) + 1;
+        }
+      }
+    }
+    return pattern;
+  };
+
   let targetDate = getNextThursday();
 
   const updateCountdown = () => {
-    let now = new Date().getTime();
+    let now = new Date();
     let timeLeft = targetDate - now;
 
     if (timeLeft >= 0) {
@@ -58,6 +75,30 @@ function HANDLE_START_COUNT() {
         e.querySelector(".Minutes").textContent = minutes.toString().padStart(2, "0");
         e.querySelector(".Seconds").textContent = seconds.toString().padStart(2, "0");
       });
+
+      // Update slot count and availability
+      const startOfWeek = new Date(targetDate);
+      startOfWeek.setDate(startOfWeek.getDate() - 7);
+      const daysSinceStart = Math.floor((now - startOfWeek) / (1000 * 60 * 60 * 24));
+      const weekNumber = Math.floor((startOfWeek - new Date(startOfWeek.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
+      const seed = weekNumber + startOfWeek.getFullYear();
+      const weekPattern = generateWeeklyPattern(seed);
+      const slotCount = weekPattern[daysSinceStart];
+      const daysLeft = days + 1;
+
+      document.querySelectorAll('.slot-count').forEach(el => {
+        el.textContent = slotCount;
+      });
+
+      document.querySelectorAll('.time-frame').forEach(el => {
+        el.textContent = daysLeft === 1 ? 'today' : `in the next ${daysLeft} days`;
+      });
+
+      const progressBar = document.querySelector('.progress-bar');
+      if (progressBar) {
+        const progress = ((9 - slotCount) / 6) * 100; // 9 is max, 3 is min
+        progressBar.style.width = `${progress}%`;
+      }
     } else {
       targetDate = getNextThursday(); // Reset to next Thursday
     }
