@@ -114,6 +114,6 @@ html {
 }
 
 /* New rule for countdown timer, outside of any media query */
-.Days, .Hours, .Minutes, .Seconds {
-  transition: opacity 0.2s ease-in-out;
+.Seconds {
+    transition: opacity 0.2s ease-in-out;
 }
