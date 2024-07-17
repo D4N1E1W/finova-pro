@@ -12,22 +12,6 @@ function getNextThursday() {
     return nextThursday;
 }
 
-function updateCountdown() {
-    const now = new Date();
-    const endOfWeek = getNextThursday();
-    
-    const timeLeft = endOfWeek - now;
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    document.querySelector('.Days').textContent = days.toString().padStart(2, '0');
-    document.querySelector('.Hours').textContent = hours.toString().padStart(2, '0');
-    document.querySelector('.Minutes').textContent = minutes.toString().padStart(2, '0');
-    document.querySelector('.Seconds').textContent = seconds.toString().padStart(2, '0');
-}
-
 function generateWeeklyPattern(seed) {
     const pattern = [];
     let remainingSlots = 5 + (seed % 5); // Start with 5-9 slots
@@ -43,6 +27,46 @@ function generateWeeklyPattern(seed) {
         }
     }
     return pattern;
+}
+
+function updateCountdown() {
+    const now = new Date();
+    const endTime = getNextThursday();
+    const timeLeft = endTime - now;
+
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    document.querySelectorAll('.Days').forEach(el => {
+        el.style.opacity = 0;
+        setTimeout(() => {
+            el.textContent = days.toString().padStart(2, '0');
+            el.style.opacity = 1;
+        }, 100);
+    });
+    document.querySelectorAll('.Hours').forEach(el => {
+        el.style.opacity = 0;
+        setTimeout(() => {
+            el.textContent = hours.toString().padStart(2, '0');
+            el.style.opacity = 1;
+        }, 100);
+    });
+    document.querySelectorAll('.Minutes').forEach(el => {
+        el.style.opacity = 0;
+        setTimeout(() => {
+            el.textContent = minutes.toString().padStart(2, '0');
+            el.style.opacity = 1;
+        }, 100);
+    });
+    document.querySelectorAll('.Seconds').forEach(el => {
+        el.style.opacity = 0;
+        setTimeout(() => {
+            el.textContent = seconds.toString().padStart(2, '0');
+            el.style.opacity = 1;
+        }, 100);
+    });
 }
 
 function updateSlotCount() {
