@@ -1,47 +1,93 @@
+function getNextThursday() {
+    const now = new Date();
+    const targetDay = 4; // 0 is Sunday, 4 is Thursday
+    const daysUntilThursday = (targetDay + 7 - now.getDay()) % 7;
+    const nextThursday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + daysUntilThursday);
+    nextThursday.setHours(12, 0, 0, 0); // Set to noon ET
+    
+    if (now > nextThursday) {
+        nextThursday.setDate(nextThursday.getDate() + 7);
+    }
+    
+    return nextThursday;
+}
+
+function updateCountdown() {
+    const now = new Date();
+    const endTime = getNextThursday();
+    const timeLeft = endTime - now;
+
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    document.querySelector('.Days').textContent = days.toString().padStart(2, '0');
+    document.querySelector('.Hours').textContent = hours.toString().padStart(2, '0');
+    document.querySelector('.Minutes').textContent = minutes.toString().padStart(2, '0');
+    document.querySelector('.Seconds').textContent = seconds.toString().padStart(2, '0');
+}
+
 function generateWeeklyPattern(seed) {
     const pattern = [];
-    let remainingSlots = 3 + (seed % 7); // Start with 3-9 slots
-    for (let i = 0; i < 7; i++) {
+    let remainingSlots = 5 + (seed % 5); // Start with 5-9 slots
+    const daysInWeek = 7;
+    
+    for (let i = 0; i < daysInWeek; i++) {
         pattern.push(remainingSlots);
-        if (remainingSlots > 3 && Math.random() < 0.7) { // 70% chance to decrease
-            remainingSlots -= Math.floor(Math.random() * Math.min(3, remainingSlots - 3)) + 1;
+        if (remainingSlots > 3 && i < daysInWeek - 1) {
+            const maxDecrease = Math.min(remainingSlots - 3, Math.ceil((remainingSlots - 3) / (daysInWeek - i - 1)));
+            if (Math.random() < 0.7) { // 70% chance to decrease
+                remainingSlots -= Math.floor(Math.random() * maxDecrease) + 1;
+            }
         }
     }
     return pattern;
 }
 
 function updateSlotCount() {
-    const today = new Date();
-    const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
-    const weekNumber = Math.floor((today - new Date(today.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
-    const dayOfWeek = today.getDay();
+    const now = new Date();
+    const startOfWeek = getNextThursday();
+    startOfWeek.setDate(startOfWeek.getDate() - 7); // Go back to last Thursday
     
-    const seed = weekNumber + today.getFullYear();
+    const daysSinceStart = Math.floor((now - startOfWeek) / (1000 * 60 * 60 * 24));
+    const weekNumber = Math.floor((startOfWeek - new Date(startOfWeek.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
+    
+    const seed = weekNumber + startOfWeek.getFullYear();
     const weekPattern = generateWeeklyPattern(seed);
-    const slotCount = weekPattern[dayOfWeek];
+    const slotCount = weekPattern[daysSinceStart];
 
-    const daysLeft = 7 - dayOfWeek;
+    const nextThursday = getNextThursday();
+    const daysLeft = Math.ceil((nextThursday - now) / (1000 * 60 * 60 * 24));
 
-    // Update all instances of slot count
     document.querySelectorAll('.slot-count').forEach(el => {
         el.textContent = slotCount;
     });
 
-    // Update all instances of time frame
     document.querySelectorAll('.time-frame').forEach(el => {
         el.textContent = daysLeft === 1 ? 'today' : `in the next ${daysLeft} days`;
     });
 
-    // Update progress bar
     const progressBar = document.querySelector('.progress-bar');
     if (progressBar) {
-        const progress = ((9 - slotCount) / 9) * 100;
+        const progress = ((9 - slotCount) / 6) * 100; // 9 is max, 3 is min
         progressBar.style.width = `${progress}%`;
     }
 }
 
-// Run on page load
-updateSlotCount();
+function initializeCounters() {
+    updateSlotCount();
+    updateCountdown();
+    
+    setInterval(updateCountdown, 1000);
+    setInterval(updateSlotCount, 60 * 60 * 1000);
+    
+    const now = new Date();
+    const nextThursday = getNextThursday();
+    const timeUntilReset = nextThursday - now;
+    setTimeout(() => {
+        location.reload();
+    }, timeUntilReset);
+}
 
-// Update every hour (you can adjust this interval)
-setInterval(updateSlotCount, 60 * 60 * 1000);
+document.addEventListener('DOMContentLoaded', initializeCounters);
