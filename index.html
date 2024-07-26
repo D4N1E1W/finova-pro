@@ -30,14 +30,60 @@
     <!-- SWIPER SLIDER LINK -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1HE4GV97JR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HE4GV97JR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1HE4GV97JR');
+    </script>
+    
+    <!-- Enhanced Referrer Tracking Script -->
+    <script>
+    function trackReferrer() {
+        var referrer = document.referrer;
+        var currentPage = window.location.href;
+        
+        if (referrer) {
+            var referrerDomain = new URL(referrer).hostname;
+            console.log('Visitor came from: ' + referrerDomain);
+            gtag('event', 'external_referral', {
+                'referrer_domain': referrerDomain,
+                'full_referrer': referrer,
+                'landing_page': currentPage
+            });
+        } else {
+            console.log('Direct visit or no referrer information available');
+            gtag('event', 'direct_visit', {
+                'landing_page': currentPage
+            });
+        }
+    }
 
-  gtag('config', 'G-1HE4GV97JR');
-</script>
+    function trackButtonClick(event) {
+        var element = event.target.closest('a, button');
+        if (element) {
+            var buttonName = element.textContent.trim() || element.getAttribute('aria-label') || 'Unnamed Button';
+            var buttonType = element.tagName.toLowerCase();
+            var buttonHref = element.href || '';
+            
+            console.log('Button clicked: ' + buttonName);
+            gtag('event', 'button_click', {
+                'button_name': buttonName,
+                'button_type': buttonType,
+                'button_href': buttonHref
+            });
+        }
+    }
+
+    // Call these functions when the page loads
+    window.addEventListener('load', function() {
+        trackReferrer();
+        
+        // Add click event listener to the entire document
+        document.addEventListener('click', trackButtonClick);
+    });
+    </script>
 </head>
 
 <body class="bg-black">
