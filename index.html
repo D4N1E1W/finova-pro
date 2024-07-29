@@ -39,8 +39,20 @@
             'custom_map': {'dimension1': 'referrer_url'}
         });
     </script>
-    
-    <!-- Enhanced Referrer Tracking Script -->
+
+    <script>
+    (function() {
+        var referrer = document.referrer;
+        if (referrer) {
+            var cookieExpiry = 1; // Cookie expiry in days
+            var date = new Date();
+            date.setTime(date.getTime() + (cookieExpiry * 24 * 60 * 60 * 1000));
+            var expires = "; expires=" + date.toUTCString();
+            document.cookie = "full_referrer=" + referrer + expires + "; path=/";
+        }
+    })();
+    </script>
+
     <script>
     function trackReferrer() {
         var referrer = document.referrer;
@@ -86,6 +98,7 @@
     });
     </script>
 </head>
+
 
 <body class="bg-black">
     <div class="bg-luxor-gold text-center pb-2.5">
