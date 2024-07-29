@@ -35,7 +35,9 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-1HE4GV97JR');
+        gtag('config', 'G-1HE4GV97JR', {
+            'custom_map': {'dimension1': 'referrer_url'}
+        });
     </script>
     
     <!-- Enhanced Referrer Tracking Script -->
@@ -45,12 +47,11 @@
         var currentPage = window.location.href;
         
         if (referrer) {
-            var referrerDomain = new URL(referrer).hostname;
-            console.log('Visitor came from: ' + referrerDomain);
+            console.log('Visitor came from: ' + referrer);
             gtag('event', 'external_referral', {
-                'referrer_domain': referrerDomain,
-                'full_referrer': referrer,
-                'landing_page': currentPage
+                'referrer_url': referrer,
+                'landing_page': currentPage,
+                'dimension1': referrer
             });
         } else {
             console.log('Direct visit or no referrer information available');
@@ -245,6 +246,7 @@
             </div>
         </div>
     </header>
+
     <!-- WHY CHOOSE FINOVA? -->
     <section class="pt-12 md:pt-16 xl:pb-[131px] sm:pb-16 pb-[61px] md:pb-12">
         <div class="container max-w-[1072px] mx-auto px-5 lg:px-7 xl:px-5">
