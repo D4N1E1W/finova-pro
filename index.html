@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- TITLE -->
-    <title>Finova</title>
+    <title>FINOVA</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- PRIMARY META TAGS -->
     <meta name="title" content="Finova">
@@ -73,32 +73,12 @@
         }
     }
 
-    function trackButtonClick(event) {
-        var element = event.target.closest('a, button');
-        if (element) {
-            var buttonName = element.textContent.trim() || element.getAttribute('aria-label') || 'Unnamed Button';
-            var buttonType = element.tagName.toLowerCase();
-            var buttonHref = element.href || '';
-            
-            console.log('Button clicked: ' + buttonName);
-            gtag('event', 'button_click', {
-                'button_name': buttonName,
-                'button_type': buttonType,
-                'button_href': buttonHref
-            });
-        }
-    }
-
-    // Call these functions when the page loads
+    // Call this function when the page loads
     window.addEventListener('load', function() {
         trackReferrer();
-        
-        // Add click event listener to the entire document
-        document.addEventListener('click', trackButtonClick);
     });
     </script>
 </head>
-
 
 <body class="bg-black">
     <div class="bg-luxor-gold text-center pb-2.5">
@@ -117,7 +97,7 @@
         <p class="ml-4 text-white font-bold text-sm">200</p>
     </div>
 </div>
-   <!-- NAVBAR START -->
+<!-- NAVBAR START -->
 <nav class="relative">
     <img class="absolute end-0 top-0 pointer-events-none" src="./assets/image/webp/hero-right-top-ellipse.webp" alt="right">
     <img class="absolute start-0 top-0 pointer-events-none" src="./assets/image/webp/hero-left-top-ellipse.webp" alt="left">
